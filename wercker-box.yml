@@ -14,9 +14,7 @@ script: |
   sudo dpkg -i riak_2.0.0rc1-1_amd64.deb
   sudo make all
 init-script: |
-  sudo riak stop
-  sudo riak start
-  sudo /usr/sbin/riak-admin wait-for-service riak_kv riak@127.0.0.1
+  sudo make run
 env:
   RIAK_HOST: $$HOST$$
   RIAK_PBCONNECT: $$HOST$$:8087
