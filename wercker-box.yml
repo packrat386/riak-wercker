@@ -1,0 +1,25 @@
+name: riak
+version: 0.0
+inherits: inherits: wercker/ubuntu12.04-webessentials@0.0.3
+type: service
+platform: ubuntu@12.04
+description: riak that wercks
+keywords:
+  - riak
+  - database
+packages:
+  - riak@2.0
+script: |
+  sudo wget http://s3.amazonaws.com/downloads.basho.com/riak/2.0/2.0.0rc1/ubuntu/precise/riak_2.0.0rc1-1_amd64.deb
+  sudo dpkg -i riak_2.0.0rc1-1_amd64.deb
+  sudo riak stop
+  sudo cp app.config /etc/riak/riak.conf
+  sudo riak start
+init-script: |
+  sudo riak stop
+  sudo riak start
+  sudo /usr/sbin/riak-admin wait-for-service riak_kv riak@127.0.0.1
+env:
+  RIAK_HOST: $$HOST$$
+  RIAK_PBCONNECT: $$HOST$$:8087
+  RIAK_HTTPCONNECT: $$HOST$$:8098
