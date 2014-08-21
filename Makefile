@@ -1,4 +1,4 @@
 all:
 	-riak stop
-	cp app.config /etc/riak/riak.conf/
+	cp app.config /etc/riak/riak.conf
 	riak start
