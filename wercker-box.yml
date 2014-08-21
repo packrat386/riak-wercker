@@ -1,5 +1,5 @@
 name: riak
-version: 0.0.2
+version: 0.0.3
 inherits: wercker/ubuntu12.04-webessentials@0.0.3
 type: service
 platform: ubuntu@12.04
@@ -16,6 +16,6 @@ script: |
 init-script: |
   sudo make run
 env:
+  RIAK_PORT: 8087
   RIAK_HOST: $$HOST$$
-  RIAK_PBCONNECT: $$HOST$$:8087
-  RIAK_HTTPCONNECT: $$HOST$$:8098
+  RIAK_PB_URL: riak://$$HOST$$:8087
